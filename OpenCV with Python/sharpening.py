@@ -31,4 +31,4 @@ cv2.imshow('Image Sharpening', sharpened)
 cv2.waitKey(0)
 
 
-cv2.destroyAllWindows()a
+cv2.destroyAllWindows()
