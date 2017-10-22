@@ -13,8 +13,20 @@ index = -1
 thickness = 4
 color = (255, 0, 255)
 
-cv2.drawContours(img2, contours, index, color, thickness)
-cv2.imshow("Contours",img2)
+objects = np.zeros([img.shape[0], img.shape[1], 3], 'uint8')
+for c in contours:
+    cv2.drawContours(objects, [c], -1, color, -1)
+    
+    area = cv2.contourArea(c)
+    perimeter = cv2.arcLength(c, True)
+    
+    M = cv2.moments(c)
+    cx = int(M['m10']/ M['m00'])
+    cy = int(M['m01']/M['m00'])
+    cv2.circle(objects, (cx,cy), 4, (0,0,255), -1)
 
+    print('Area: {}, perimeter: {}'.format(area,perimeter))    
+    
+cv2.imshow('Contours', objects)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
